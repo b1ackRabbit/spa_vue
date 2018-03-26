@@ -10,8 +10,7 @@
           <span>created {{ message.created_at }}</span> <br>
           <span>updated {{ message.updated_at }}</span>   
         </div>
-          <br><br>  
-          <br><br>  
+         
     </div>
     <div v-if="message.deleted">
       <p>Message from {{ message.author }} was deleted</p>
@@ -50,3 +49,18 @@ export default {
 
 }
 </script>
+
+<style>
+  .message-block{
+    position: relative;
+    padding: 25px 10%;
+    border-bottom: 1px solid #999;
+    text-align: left;
+  }
+  .message-block:hover{
+    background-color: #eee;
+  }
+  .message-author{
+    font-weight: bold;
+  }
+</style>

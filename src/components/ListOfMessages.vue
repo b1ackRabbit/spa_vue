@@ -1,10 +1,11 @@
 <template>
     <div>
-        <div class="" v-if="!showOne">
-            <router-link to="/edit-message">Add New Message</router-link>
+        <div class="new-message-button" v-if="!showOne">
+            <router-link to="/edit-message"class="btn btn-primary">Add New Message</router-link>
         </div>
 
         <div class="list-of-messages">
+            <p class="font-italic">Messages</p>          
             <div class="message" v-for="(message,index) in sortedMessages">
                 <messageShow v-bind:message="message" v-bind:showOne="showOne" ></messageShow>
             </div>
@@ -93,3 +94,8 @@ export default {
 
 }
 </script>
+
+<style type="text/css">
+  .new-message-button{margin-bottom: 20px;}
+
+</style>

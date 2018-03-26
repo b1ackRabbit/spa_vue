@@ -1,12 +1,12 @@
 <template>
-	<div>
+	<div class="commands">
 		<span v-if="!deleted">
-			<router-link v-bind:to="'/edit-message/' + messageId">edit</router-link>
-		  <a href="#" class="remove-message"  v-on:click.prevent="deleteMessage( messageId )">x</a>
-		  <router-link v-if="!showOne" v-bind:to="'/messages/' + messageId">show detailes (load one message)</router-link>
+			<router-link class="edit" v-bind:to="'/edit-message/' + messageId"></router-link>
+		  <a href="#" class="remove-message close"  v-on:click.prevent="deleteMessage( messageId )"></a>
+		  <router-link class="info" v-if="!showOne" v-bind:to="'/messages/' + messageId"></router-link>
 		</span>
-	  <router-link v-if="showOne" to="/messages">show all messages</router-link>
-	 </div>
+	  <router-link  v-if="showOne" to="/messages">show all messages</router-link>
+	</div>
    
 </template>
 
@@ -37,3 +37,21 @@ export default {
 
 }
 </script>
+
+<style type="text/css">
+	.commands{
+		position: absolute;
+		top:0;
+		right: 0;
+	}
+	.close:after{
+		content: "\2715";
+	}
+	.edit:after{
+		content: "\270E";
+
+	}
+	.info:after{
+		content: "\2139";
+	}
+</style>

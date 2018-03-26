@@ -1,31 +1,38 @@
 <template>
-    <div>
-        <p v-if="!message.id">Send New Message</p>
-        <p v-else>Updating of existing Message</p>
-        <p><router-link to="/messages">back to full list</router-link></p>
+    <div class="for-form">
+
+          <p class="font-italic" v-if="!message.id">Send New Message</p>
+          <p class="font-italic" v-else>Updating of existing Message</p>
         <form v-on:submit.prevent="submitForm">
-            <input type="hidden" name="id" v-model="message.id">
-            <input type="text" name="author" placeholder="Name" v-model="message.author">
-            <br><textarea name="text"  placeholder="Enter the text of your message" v-model="message.text"></textarea>
-            <br><input type="submit" name="" v-bind:value="message.buttonText">
-        </form>
+  <div class="form-group">
+    <label for="author">Author</label>
+    <input type="text" id="author" class="form-control" name="author" placeholder="Name" v-model="message.author">
+  </div>
+  <div class="form-group">
+    <label for="text">Text</label>
+    <textarea id="text" class="form-control" name="text"  placeholder="Enter the text of your message" v-model="message.text"></textarea>
+  </div>
+  <div class="buttons">
+    <button class="btn btn-secondary" v-on:click.prevent="resetForm">Reset</button> <router-link class="btn btn-warning"  to="/messages">Cancel</router-link> <input class="btn btn-primary" type="submit" name="" v-bind:value="message.buttonText">
+  </div>
+</form>
     </div>
 </template>
 
 <script>
 
-
+var emptyForm = {
+        id: 0,
+        author : '',
+        text: '',
+        buttonText: "Send Message"
+      }
 
 export default {
   name: 'editMessages',
   data () {
     return {
-      message: {
-        id: 0,
-        author : '',
-        text: '',
-        buttonText: "Send Message"
-      },
+      message: emptyForm,
     }
   },
   // mixins: [spaMixin],
@@ -54,7 +61,9 @@ export default {
       });                    
     },
    
-
+    resetForm: function(){
+      this.message = emptyForm;
+    },
     submitForm: function() {
       if(!this.message.id){
         this.sendNewMessage();
@@ -86,3 +95,14 @@ export default {
   }
 }
 </script>
+<style type="text/css">
+.for-form{
+  text-align: left;
+}
+  form{
+    text-align: left;
+  }
+  .buttons{
+    text-align: right;
+  }
+</style>
