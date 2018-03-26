@@ -13,6 +13,9 @@
 </template>
 
 <script>
+
+
+
 export default {
   name: 'editMessages',
   data () {
@@ -25,12 +28,13 @@ export default {
       },
     }
   },
+  // mixins: [spaMixin],
   created: function(){
     this.init();
   },  
   methods: {
     init: function(){
-      console.log(this.$route.params.id);
+      // this.hello();
       if(!!this.$route.params.id){
         this.getMessage(this.$route.params.id);
       }else{

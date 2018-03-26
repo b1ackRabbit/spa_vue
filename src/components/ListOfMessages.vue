@@ -1,17 +1,12 @@
 <template>
     <div>
-        <div class="">
+        <div class="" v-if="!showOne">
             <router-link to="/edit-message">Add New Message</router-link>
         </div>
 
         <div class="list-of-messages">
-            <div class="message" v-for="(message,index) in messages">
-                <router-link v-bind:to="'/edit-message/' + message.id">edit</router-link>
-                <a href="#" class="remove-message" v-on:click.prevent="deleteMessage( message.id )">x</a>
-                <router-link v-bind:to="$route.path + '/' + message.id">show detailes (load one message)</router-link>
-                <p class="message-author">{{ message.author }}</p>
-                <div class="message-body">{{ message.text }}</div>
-                
+            <div class="message" v-for="(message,index) in sortedMessages">
+                <messageShow v-bind:message="message" v-bind:showOne="showOne" ></messageShow>
             </div>
         </div>
     </div>
@@ -19,34 +14,74 @@
 
 <script>
 
+
+// import commands from './Commands.vue';
+import messageShow from './MessageShow.vue';
+
+
+
+
 export default {
   name: 'ListOfMessages',
   data () {
     return {
-      messages : []
+      messages : [],
+      showOne : false
     }
+  },
+  components: {
+    // 'commands': commands,
+    'messageShow' : messageShow
   },
   created: function(){
     // this.prepareToSaveMessage();
     this.init();
   },
+  watch: {
+    '$route' (to, from) {
+      this.messages = []
+      this.showOne = false;
+      this.getMessages(this.$route.params.id);
+    }
+  },
+  computed: {
+    sortedMessages: function() {
+      function compare(a, b) {
+        if (a.id > b.id)
+          return -1;
+        if (a.id < b.id)
+          return 1;
+        return 0;
+      }
+
+      return this.messages.sort(compare);
+    }
+  },
   methods: {
+    
     init: function(){
 
-      this.getMessages();
+      this.getMessages(this.$route.params.id);
     },
-    getMessages: function() { 
+    getMessages: function(messId) { 
 
-      this.$http.get('comments').then((response) => { 
+      this.$http.get('comments' + (messId ? ('/' + messId) : '' )).then((response) => { 
         if(!!response.body) {
-
           var answer = response.body;
-          for (var messageNumber in answer){
-            if (answer.hasOwnProperty(messageNumber)) {
-              if(typeof messageNumber === "number" || !isNaN(parseInt(messageNumber)) && typeof parseInt(messageNumber) === "number"){
-                this.messages.push(answer[messageNumber]);
+          if(!messId){
+            console.log('g');
+            for (var messageNumber in answer){
+              if (answer.hasOwnProperty(messageNumber)) {
+                if(typeof messageNumber === "number" || !isNaN(parseInt(messageNumber)) && typeof parseInt(messageNumber) === "number"){
+                  answer[messageNumber].deleted = false;
+                  this.messages.push(answer[messageNumber]);
+                }
               }
             }
+          }else{
+            answer.deleted = false;
+            this.messages.push(answer);
+            this.showOne = true;
           }
 
         }

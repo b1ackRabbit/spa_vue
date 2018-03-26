@@ -2,10 +2,10 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import ListOfMessages from '@/components/ListOfMessages'
-import Message from '@/components/Message'
+// import Message from '@/components/Message'
 import EditMessages from '@/components/EditMessages'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -14,16 +14,16 @@ export default new Router({
     },
    
     {
-      path: '/messages',
+      path: '/messages/:id?',
       name: 'ListOfMessages',
       component: ListOfMessages
-    },
+    }/*,
 
-	{
+  	{
       path: '/messages/:id',
       name: 'Message',
       component: Message
-    },
+    }*/,
     {
       path: '/edit-message/:id?',
       name: 'EditMessages',
