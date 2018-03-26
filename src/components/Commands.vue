@@ -26,12 +26,12 @@ export default {
   },
   methods: {
     deleteMessage: function(messageId){
-    	this.$emit('messageDeletedEvent',messageId);
-	    /*this.$http.delete("comments/"+messageId).then((response) => { 
+	    this.$http.delete("comments/"+messageId).then((response) => { 
+	    	this.$emit('messageDeletedEvent',messageId);
 	    	// this.$router.push(this.$route.path);
 	    }, (response) => {
 	        this.error = response;
-	    });*/ 
+	    }); 
     },
   }
 
