@@ -1,22 +1,22 @@
 <template>
-    <div class="for-form">
+  <div class="for-form">
 
-          <p class="font-italic" v-if="!message.id">Send New Message</p>
-          <p class="font-italic" v-else>Updating of existing Message</p>
-        <form v-on:submit.prevent="submitForm">
-  <div class="form-group">
-    <label for="author">Author</label>
-    <input type="text" id="author" class="form-control" name="author" placeholder="Name" v-model="message.author">
+    <p class="font-italic" v-if="!message.id">Send New Message</p>
+    <p class="font-italic" v-else>Updating of existing Message</p>
+    <form v-on:submit.prevent="submitForm">
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" id="author" class="form-control" name="author" placeholder="Name" v-model="message.author">
+      </div>
+      <div class="form-group">
+        <label for="text">Text</label>
+        <textarea id="text" class="form-control" name="text"  placeholder="Enter the text of your message" v-model="message.text"></textarea>
+      </div>
+      <div class="buttons">
+        <button class="btn btn-secondary" v-on:click.prevent="resetForm">Reset</button> <router-link class="btn btn-warning"  to="/messages">Cancel</router-link> <input class="btn btn-primary" type="submit" name="" v-bind:value="message.buttonText">
+      </div>
+    </form>
   </div>
-  <div class="form-group">
-    <label for="text">Text</label>
-    <textarea id="text" class="form-control" name="text"  placeholder="Enter the text of your message" v-model="message.text"></textarea>
-  </div>
-  <div class="buttons">
-    <button class="btn btn-secondary" v-on:click.prevent="resetForm">Reset</button> <router-link class="btn btn-warning"  to="/messages">Cancel</router-link> <input class="btn btn-primary" type="submit" name="" v-bind:value="message.buttonText">
-  </div>
-</form>
-    </div>
 </template>
 
 <script>
@@ -96,9 +96,10 @@ export default {
 }
 </script>
 <style type="text/css">
-.for-form{
-  text-align: left;
-}
+  .for-form{
+    text-align: left;
+    padding: 25px 10%;
+  }
   form{
     text-align: left;
   }
