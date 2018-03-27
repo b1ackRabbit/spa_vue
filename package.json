@@ -1,17 +1,15 @@
 {
-  "name": "itcr_test_task",
+  "name": "spa.project",
   "version": "1.0.0",
-  "description": "Test task for IT Craft on position front-end developer",
+  "description": "Test Task SPA with vue.js",
   "author": "Maaxym <maxym.marchenko@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "test": "npm run unit",
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bootstrap-vue": "^2.0.0-rc.2",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.0",
     "vue-router": "^3.0.1"
